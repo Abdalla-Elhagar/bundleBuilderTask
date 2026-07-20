@@ -19,6 +19,8 @@ import v2White from "../assets/productsImages/cameraColors/Wyze Cam Floodlight v
 import v2Black from "../assets/productsImages/cameraColors/Wyze Cam Floodlight v2 black.png";
 import proWhite from "../assets/productsImages/cameraColors/Wyze Battery Cam Pro white.png";
 import proBlack from "../assets/productsImages/cameraColors/Wyze Battery Cam Pro black.png";
+import plan1 from "../assets/review/plan.png";
+import plan2 from "../assets/review/Fast Shipping.png";
 
 import type { productsType, stepsType } from "../types/types";
 
@@ -192,4 +194,9 @@ export const stepsData: stepsType[] = [
     stepIcon: step4logo,
     active: false,
   },
+];
+
+export const reviewLastSections = [
+  { name: "", price: 12.99, image: plan1, discount: 24 },
+  { name: "Fast Shipping", price: 5.99, image: plan2, discount: 100 },
 ];

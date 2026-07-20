@@ -3,6 +3,7 @@ import type { cartType, productsType } from "../types/types";
 import { CartContext } from "../context/CartContext";
 import ColorSelector from "./ColorSelector";
 import StepCounter from "./StepCounter";
+import { getDiscountedPrice } from "../utils/price";
 
 const Card = ({ product }: { product: productsType }) => {
   const [selectedColor, setSelectedColor] = useState(product.selectedColor);
@@ -26,6 +27,7 @@ const Card = ({ product }: { product: productsType }) => {
         discount: product.discount,
         price: product.price,
         selectedColor: selectedColor,
+        isRequired: product.isRequired,
       };
       setCartData((prev: any) => [...prev, cartProduct]);
     }
@@ -35,7 +37,7 @@ const Card = ({ product }: { product: productsType }) => {
     <div
       onClick={handleCart}
       key={product.id}
-      className={`Card flex  gap-4 w-full md:w-1/5 md:min-w-80 lg:w-[46%] min-h-25 bg-white relative rounded-[10px] ${isActive() ? "border-2 border-primary" : ""}`}
+      className={`Card flex  gap-4 w-full md:w-1/5 md:min-w-78 xl:w-[46%] min-h-25 bg-white relative rounded-[10px] ${isActive() ? "border-2 border-primary" : ""}`}
     >
       {product.discount && (
         <div
@@ -83,7 +85,8 @@ const Card = ({ product }: { product: productsType }) => {
             </p>
             {product.discount && (
               <p>
-                ${(product.price - (product.discount / 100) * 100).toFixed(2)}
+                $
+                {getDiscountedPrice(product.price, product.discount).toFixed(2)}
               </p>
             )}
           </div>

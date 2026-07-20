@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { products, stepsData } from "../data/mocData";
-import type { productsType, stepsType } from "../types/types";
+import type { cartType, productsType, stepsType } from "../types/types";
 import Card from "./Card";
 import { CartContext } from "../context/CartContext";
 
 const Step = ({ className }: { className: string }) => {
-  const { cartData } = useContext(CartContext);
+  const { cartData, setCartData } = useContext(CartContext);
   const [steps, setSteps] = useState(stepsData);
 
   const handleClick = (step: stepsType) => {
@@ -27,14 +27,36 @@ const Step = ({ className }: { className: string }) => {
       }),
     );
   };
+
+  useEffect(() => {
+    const requiredProducts = products.filter((p: productsType) => p.isRequired);
+
+    setCartData((prev: cartType[]) => {
+      const newItems = requiredProducts
+        .filter((p) => !prev.some((item) => item.id === p.id))
+        .map((p) => ({
+          id: p.id,
+          name: p.name,
+          category: p.category,
+          quantity: 1,
+          image: p.image,
+          discount: p.discount,
+          price: p.price,
+          selectedColor: p.selectedColor ?? null,
+          isRequired: p.isRequired,
+        }));
+
+      return [...prev, ...newItems];
+    });
+  }, []);
   return (
-    <>
+    <div className={`${className} steps`}>
       {steps.map((step: stepsType) => (
-        <div key={step.stepNumber} className="col-span-1 w-full lg:col-span-2 ">
+        <div key={step.stepNumber} className="col-span-1 w-full xl:col-span-2 ">
           <div
-            className={`${className} Step border-b border-[#1F1F1F] ${step.active ? "bg-secondary border-b-0 rounded-[10px] " : "rounded-none"}`}
+            className={` Step border-b border-[#1F1F1F] ${step.active ? "bg-secondary border-b-0 rounded-[10px] " : "rounded-none"}`}
           >
-            <div className="stepHeader p-4 text-[#484848] border-b border-gray-500 ">
+            <div className="stepHeader py-1 px-4 text-[#484848] border-b border-gray-500 text-xs ">
               STEP {step.stepNumber} OF {stepsData.length}
             </div>
             <div
@@ -47,7 +69,17 @@ const Step = ({ className }: { className: string }) => {
               </div>
 
               <div className="arrow text-primary">
-                {cartData.length > 0 && <span>{cartData.length} selected</span>}
+                {cartData.filter((p: cartType) => p.category == step.category)
+                  .length > 0 && (
+                  <span>
+                    {
+                      cartData.filter(
+                        (p: cartType) => p.category == step.category,
+                      ).length
+                    }{" "}
+                    selected
+                  </span>
+                )}
 
                 <svg
                   className={`inline ${step.active ? "rotate-0" : "rotate-180"}`}
@@ -82,22 +114,28 @@ const Step = ({ className }: { className: string }) => {
               }`}
             >
               <div className="overflow-hidden">
-                <div className="container">
-                  <div className="content flex justify-center gap-4 flex-wrap">
-                    {products
-                      .filter(
-                        (product: productsType) =>
-                          product.category === step.category,
-                      )
-                      .map((product: productsType) => (
-                        <Card product={product} key={product.id} />
-                      ))}
-                  </div>
+                <div className="px-3">
+                  {step.stepNumber == 4 ? (
+                    <div className="p-4 text-center text-primary font-semibold">
+                      Don't know what should i do here
+                    </div>
+                  ) : (
+                    <div className="content p-4 flex justify-center gap-4 flex-wrap">
+                      {products
+                        .filter(
+                          (product: productsType) =>
+                            product.category === step.category,
+                        )
+                        .map((product: productsType) => (
+                          <Card product={product} key={product.id} />
+                        ))}
+                    </div>
+                  )}
 
                   {step.stepNumber !== steps.length && (
                     <button
                       onClick={() => handleNextStep(step.stepNumber)}
-                      className="next-step text-primary border border-primary px-10 py-2 mx-auto block rounded-[7px] mt-10"
+                      className="next-step text-primary border border-primary px-10 py-2 mx-auto block rounded-[7px] my-10"
                     >
                       Next: Choose your plan
                     </button>
@@ -108,7 +146,7 @@ const Step = ({ className }: { className: string }) => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

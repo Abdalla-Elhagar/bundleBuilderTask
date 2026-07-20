@@ -1,75 +1,127 @@
-# React + TypeScript + Vite
+# Bundle Builder Task
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive React application that recreates the provided Figma design for a multi-step security system bundle builder.
 
-Currently, two official plugins are available:
+## 🔗 Repository
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+GitHub: https://github.com/Abdalla-Elhagar/bundleBuilderTask
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📌 Features
 
-## Expanding the ESLint configuration
+- Multi-step accordion interface.
+- Dynamic product selection.
+- Live review panel synchronized with the builder.
+- Variant (color) selection.
+- Quantity stepper synchronization between product cards and review panel.
+- Automatic total price calculation.
+- Responsive design for desktop, tablet, and mobile.
+- Persistent cart using Local Storage.
+- Data-driven UI powered by mock data.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS v4
+- React Context API
+- ESLint
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
+## 🚀 Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Abdalla-Elhagar/bundleBuilderTask.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## 📂 Project Structure
 
 ```
+src/
+│
+├── components/
+├── context/
+├── data/
+│   └── mockData.ts
+├── types/
+├── assets/
+└── App.tsx
+```
+
+---
+
+## 📦 State Management
+
+The application uses **React Context API** to manage the bundle state globally, keeping product selection, quantities, and the review panel synchronized across the application.
+
+---
+
+## 📊 Data
+
+The application is fully data-driven using a local **mockData** source, making it easy to extend or replace with an API in the future.
+
+---
+
+## 💾 Persistence
+
+The selected security system is saved using **Local Storage**, allowing users to restore their configuration after refreshing or revisiting the application.
+
+---
+
+## 🎯 Responsive Design
+
+The application is designed to provide a smooth experience across:
+
+- Desktop
+- Tablet
+- Mobile
+
+---
+
+## ✨ Notes
+
+- The UI is built to closely match the provided Figma design.
+- Components are designed to be reusable and maintainable.
+- The project structure is organized to support future scalability.
+- The data layer can be easily replaced with a backend API without changing the UI logic.
+
+---
+
+## 👤 Author
+
+**Abdalla Elhagar**
+
+GitHub: https://github.com/Abdalla-Elhagar

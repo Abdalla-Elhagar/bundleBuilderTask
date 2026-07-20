@@ -4,10 +4,12 @@ const StepCounter = ({
   cartData,
   setCartData,
   product,
+  buttonsClass,
 }: {
   cartData: cartType[];
   setCartData: any;
-  product: productsType;
+  product: productsType | cartType;
+  buttonsClass?: string;
 }) => {
   const quantity = cartData.find((item) => item.id === product.id)?.quantity;
 
@@ -38,12 +40,13 @@ const StepCounter = ({
     });
   };
 
-  const btnStyle = "size-5  rounded-sm";
+  const btnStyle = "size-5  rounded-sm disabled:";
 
   return (
     <div className="quantity flex justify-start items-center gap-2 text-lg leading-0 whitespace-nowrap">
       <button
-        className={`${btnStyle} bg-[#F0F4F7] text-[#525963]`}
+        className={`${btnStyle} ${buttonsClass} bg-[#F0F4F7] text-[#525963] disabled:border  disabled:border-[#E6EBF0] disabled:text-[#E6EBF0]`}
+        disabled={product.isRequired}
         onClick={(e) => {
           e.stopPropagation();
           handleClick("inc");
@@ -53,8 +56,8 @@ const StepCounter = ({
       </button>
       <div>{quantity || 0}</div>
       <button
-        className={`${btnStyle} ${quantity == 0 || !quantity ? "border border-[#E6EBF0] text-[#E6EBF0]" : "border-0 bg-[#F0F4F7] text-[#525963]"}`}
-        disabled={quantity == 0}
+        className={`${btnStyle} ${buttonsClass} ${quantity == 0 || !quantity ? "border  border-[#E6EBF0] text-[#E6EBF0]" : "border-0 bg-[#F0F4F7] text-[#525963]"}`}
+        disabled={quantity == 0 || product.isRequired}
         onClick={(e) => {
           e.stopPropagation();
           handleClick("dec");

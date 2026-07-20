@@ -29,4 +29,5 @@ export interface cartType {
   discount: number | null;
   price: number;
   selectedColor: string | null;
+  isRequired?: boolean;
 }
