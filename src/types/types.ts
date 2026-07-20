@@ -4,12 +4,12 @@ export interface productsType {
   description: string;
   discount: number | null;
   image: string;
-  colors?: { name: string; image: string; selected: boolean }[] | [];
-  quantity: number;
+  colors?: { name: string; image: string }[] | [];
   price: number;
   category: string;
   isRequired: boolean;
   require?: boolean;
+  selectedColor: string | null;
 }
 
 export interface stepsType {
@@ -17,5 +17,16 @@ export interface stepsType {
   stepTitle: string;
   stepIcon: string;
   active: boolean;
-  productsId?: number[];
+  category?: string;
+}
+
+export interface cartType {
+  id: number;
+  name: string;
+  category: string;
+  quantity: number;
+  image: string;
+  discount: number | null;
+  price: number;
+  selectedColor: string | null;
 }

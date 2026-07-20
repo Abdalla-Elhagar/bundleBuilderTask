@@ -3,6 +3,7 @@
 @theme {
   --color-primary: #4e2fd2;
   --color-secondary: #edf4ff;
+  --color-text-color: #1f1f1fbf;
 }
 
 @utility container {
@@ -10,6 +11,13 @@
   margin-right: auto;
 
   padding: 15px 20px;
+}
+
+@utility mobileContainer {
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 20px;
 }
 
 body {
