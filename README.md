@@ -4,8 +4,8 @@ A responsive React application that recreates the provided Figma design for a mu
 
 ## 🔗 Repository
 
-GitHub: https://github.com/Abdalla-Elhagar/bundleBuilderTask
-Demo: https://bundle-builder-task-three.vercel.app/
+### GitHub: https://github.com/Abdalla-Elhagar/bundleBuilderTask 
+### Demo: https://bundle-builder-task-three.vercel.app
 
 ---
 
